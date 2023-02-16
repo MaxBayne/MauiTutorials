@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApplication.Pages.CreatePersonPage"
+             Title="Create Person">
+    
+    <Grid Padding="10"
+          ColumnDefinitions="*"
+          RowDefinitions="100,auto,auto,auto,auto,auto,*">
+
+        <Image Grid.Column="0" 
+               Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Source="dotnet_bot.png"/>
+        
+        <Entry x:Name="txtFirstName" Grid.Row="1" Placeholder="FirstName"/>
+        <Entry x:Name="txtLastName" Grid.Row="2" Placeholder="LastName"/>
+        <Entry x:Name="txtEmail" Grid.Row="3" Placeholder="Email"/>
+        <Entry x:Name="txtMobile" Grid.Row="4" Placeholder="Mobile"/>
+
+        <Button Grid.Row="5" Text="Save" Margin="0,20,0,20" Clicked="Button_OnClicked" />
+
+        <CollectionView Grid.Row="6" x:Name="lstPersons">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Mohammed</x:String>
+                    <x:String>Ali</x:String>
+                    <x:String>Mona</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    
+                    <!--SwipeView For Support Delete Feature-->
+                    <SwipeView>
+
+                        <SwipeView.RightItems>
+                            <SwipeItem IconImageSource="recyclebein.png"/>
+                        </SwipeView.RightItems>
+
+
+                        <Grid Padding="0,5,0,5">
+                            <Frame>
+                                <Label Text="{Binding .}"></Label>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+</Grid>
+
+</ContentPage>

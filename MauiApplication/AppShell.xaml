@@ -2,13 +2,19 @@
 <Shell
     x:Class="MauiApplication.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:MauiApplication"
+    xmlns:pages="clr-namespace:MauiApplication.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
+
+    <ShellContent
+        Title="Create Person Page"
+        ContentTemplate="{DataTemplate pages:CreatePersonPage}"
+        Route="CreatePersonPage" />
 
 </Shell>

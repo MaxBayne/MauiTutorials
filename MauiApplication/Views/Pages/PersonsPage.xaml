@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewsModels="clr-namespace:MauiApplication.ViewsModels"
+             xmlns:viewModels="clr-namespace:MauiApplication.ViewsModels"
+             xmlns:dataModels="clr-namespace:MauiApplication.Models"
              x:Class="MauiApplication.Views.Pages.PersonsPage"
-             x:DataType="viewsModels:PersonsViewModel"
+             x:DataType="viewModels:PersonsViewModel"
+             x:Name="ThisPage"
              Title="Persons">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" IconImageSource="addround24.png" Command="{Binding NavigateToCreatePersonPageCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <VerticalStackLayout>
-        <Label 
-            Text="Persons List"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <CollectionView x:Name="LstPersons" 
+                        ItemsSource="{Binding PersonsList}" >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="dataModels:Person">
+
+                    <!--SwipeView For Support Delete Feature-->
+                    <SwipeView>
+
+                        <SwipeView.RightItems>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                            <SwipeItem IconImageSource="recyclebein.png"
+                                       Command="{Binding Source={x:Reference ThisPage},Path=BindingContext.RemovePersonCommand}"
+                                       CommandParameter="{Binding Id}"/>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="5,5,5,5">
+                            <Frame>
+                                <Label Text="{Binding FirstName }"></Label>
+                            </Frame>
+                        </Grid>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

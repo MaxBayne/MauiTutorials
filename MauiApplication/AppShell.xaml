@@ -17,11 +17,11 @@
     </ShellItem>
 
     <ShellItem Title="Products">
-        <ShellContent ContentTemplate="{DataTemplate viewsPages:PersonsPage}" Route="persons" />
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:ProductsPage}" Route="products" />
     </ShellItem>
 
     <ShellItem Title="Departments">
-        <ShellContent ContentTemplate="{DataTemplate viewsPages:PersonsPage}" Route="persons" />
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:DepartmentsPage}" Route="departments" />
     </ShellItem>
 
 </Shell>

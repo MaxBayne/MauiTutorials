@@ -8,6 +8,11 @@
              x:Name="ThisPage"
              Title="Create Person">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" IconImageSource="save24.png" Command="{Binding SavePersonCommand}"/>
+        <ToolbarItem Text="Clear" IconImageSource="trash24.png" Command="{Binding ClearInputsCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <Grid Padding="10"
           ColumnDefinitions="*"
           RowDefinitions="100,auto,auto,auto,auto,auto,*">
@@ -21,38 +26,6 @@
         <Entry x:Name="TxtLastName" Grid.Row="2" Placeholder="LastName" Text="{Binding Person.LastName  ,Mode=TwoWay}"/>
         <Entry x:Name="TxtEmail" Grid.Row="3" Placeholder="Email" Text="{Binding Person.Email  ,Mode=TwoWay}"/>
         <Entry x:Name="TxtMobile" Grid.Row="4" Placeholder="Mobile" Text="{Binding Person.Mobile  ,Mode=TwoWay}"/>
-
-        <Grid Grid.Row="5" ColumnDefinitions="*,*" ColumnSpacing="10">
-            <Button Grid.Column="0"  Text="Save"  Command="{Binding SavePersonCommand}"  />
-            <Button Grid.Column="1"  Text="Remove"  Command="{Binding RemovePersonCommand}"  />
-        </Grid>
-       
-        <CollectionView Grid.Row="6" x:Name="LstPersons" ItemsSource="{Binding PersonsList}" >
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="dataModels:Person">
-
-                    <!--SwipeView For Support Delete Feature-->
-                    <SwipeView>
-
-                        <SwipeView.RightItems>
-                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-                            <SwipeItem IconImageSource="recyclebein.png"
-                                       Command="{Binding Source={x:Reference ThisPage},Path=BindingContext.RemovePersonCommand}"
-                                       CommandParameter="{Binding Id}"/>
-                        </SwipeView.RightItems>
-
-                        <Grid Padding="0,5,0,5">
-                            <Frame>
-                                <Label Text="{Binding FirstName }"></Label>
-                            </Frame>
-                        </Grid>
-
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
 
     </Grid>
 

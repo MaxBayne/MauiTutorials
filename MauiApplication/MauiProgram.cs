@@ -21,15 +21,18 @@ public static class MauiProgram
 
         ///////////////////////////// Start Config Services For Dependency Injection ///////////////////////////
 
-        //For Pages as Singleton
-        builder.Services.AddSingleton<CreatePersonPage>();
+        //For Pages
+        builder.Services.AddSingleton<PersonsPage>();
+        builder.Services.AddTransient<CreatePersonPage>();
 
 
-        //For ViewModels as Transient
+        //For ViewModels
+        builder.Services.AddTransient<IPersonsViewModel, PersonsViewModel>();
         builder.Services.AddTransient<ICreatePersonViewModel,CreatePersonViewModel>();
 
-        //For Services as Transient
-        builder.Services.AddTransient<IPersonsService, PersonsService>();
+
+        //For Services
+        builder.Services.AddSingleton<IPersonsService, PersonsService>();
 
         ///////////////////////////// End Config Services For Dependency Injection ///////////////////////////
 

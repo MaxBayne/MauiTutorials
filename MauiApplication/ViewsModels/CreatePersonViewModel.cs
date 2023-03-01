@@ -12,12 +12,12 @@ namespace MauiApplication.ViewsModels
         //Properties
 
         Person Person { get; set; }
-        ObservableCollection<Person> PersonsList { get; set; }
 
         //Commands
-        IRelayCommand GetPersonsCommand { get; }
-        IRelayCommand SavePersonCommand { get; }
+        IAsyncRelayCommand SavePersonCommand { get; }
         IRelayCommand<Guid> RemovePersonCommand { get; }
+
+        IRelayCommand ClearInputsCommand { get; }
     }
 
 
@@ -29,7 +29,6 @@ namespace MauiApplication.ViewsModels
         {
             _personsService = personsService;
             Person = new();
-            PersonsList = new ();
         }
 
         #region Fields For Properties
@@ -39,9 +38,6 @@ namespace MauiApplication.ViewsModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasPerson))]
         private Person _person;
-
-        [ObservableProperty]
-        private ObservableCollection<Person> _personsList;
 
         #endregion
 
@@ -57,31 +53,16 @@ namespace MauiApplication.ViewsModels
         /*Community ToolKit Will Generate Commands for that Fields*/
 
         [RelayCommand]
-        private async void GetPersons()
-        {
-            var personsList = await _personsService.GetPersons();
-
-            if (personsList != null)
-            {
-                PersonsList = new(personsList);
-            }
-        }
-
-        [RelayCommand]
-        private void SavePerson()
+        private async Task SavePerson()
         {
             //Validate Data
             if (string.IsNullOrEmpty(Person.FirstName))
                 return;
+            
+            //Save Data
+            _personsService.AddPerson(Person);
 
-            //Generate Person Id
-            Person.Id=Guid.NewGuid();
-
-            //Store Data inside Collection
-            PersonsList.Add(Person);
-
-            //Empty Fields
-            Person = new Person();
+            await Shell.Current.GoToAsync("..");
         }
 
         [RelayCommand]
@@ -89,27 +70,32 @@ namespace MauiApplication.ViewsModels
         {
             try
             {
-                var personToDelete = PersonsList.FirstOrDefault(c => c.Id == personId);
+                _personsService.RemovePerson(personId);
 
-                if (personToDelete != null)
-                {
-                    PersonsList.Remove(personToDelete);
-
-                    await Application.Current?.MainPage?.DisplayAlert("Delete", "Person Deleted", "ok")!;
-                }
+                await Application.Current?.MainPage?.DisplayAlert("Delete", "Person Deleted", "ok")!;
             }
             catch (Exception e)
             {
                 await Application.Current?.MainPage?.DisplayAlert("Error", e.Message, "ok")!;
             }
-            
         }
 
-       
+        [RelayCommand]
+        private async void ClearInputs()
+        {
+            try
+            {
+                Person=new ();
+            }
+            catch (Exception e)
+            {
+                await Application.Current?.MainPage?.DisplayAlert("Error", e.Message, "ok")!;
+            }
+        }
 
         #endregion
 
 
-        
+
     }
 }

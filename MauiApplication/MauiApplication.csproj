@@ -49,7 +49,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\add.png" />
+	  <None Remove="Resources\Images\Add24.png" />
 	  <None Remove="Resources\Images\recyclebein.png" />
+	  <None Remove="Resources\Images\save24.png" />
+	  <None Remove="Resources\Images\trash24.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -57,7 +61,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Pages\DepartmentsPage.xaml.cs">
+	    <DependentUpon>DepartmentsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Pages\ProductsPage.xaml.cs">
+	    <DependentUpon>ProductsPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\Pages\CreatePersonPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\DepartmentsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PersonsPage.xaml">

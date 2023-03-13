@@ -6,6 +6,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
+		//Define the Root Page of Application
 		MainPage = new AppShell();
 	}
 }

@@ -52,6 +52,8 @@
 	  <None Remove="Resources\Images\add.png" />
 	  <None Remove="Resources\Images\Add24.png" />
 	  <None Remove="Resources\Images\recyclebein.png" />
+	  <None Remove="Resources\Images\refresh24.png" />
+	  <None Remove="Resources\Images\refresh32.png" />
 	  <None Remove="Resources\Images\save24.png" />
 	  <None Remove="Resources\Images\trash24.png" />
 	</ItemGroup>
@@ -61,6 +63,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Pages\EditPersonPage.xaml.cs">
+	    <DependentUpon>EditPersonPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Pages\DepartmentsPage.xaml.cs">
 	    <DependentUpon>DepartmentsPage.xaml</DependentUpon>
 	  </Compile>
@@ -70,6 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Pages\EditPersonPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\CreatePersonPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -79,6 +87,10 @@
 	  <MauiXaml Update="Views\Pages\PersonsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Extensions\" />
 	</ItemGroup>
 
 </Project>

@@ -9,12 +9,13 @@
              Title="Persons">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" IconImageSource="refresh24.png" Command="{Binding RefreshPersonsCommand}"/>
         <ToolbarItem Text="Add" IconImageSource="addround24.png" Command="{Binding NavigateToCreatePersonPageCommand}"/>
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout>
         <CollectionView x:Name="LstPersons" 
-                        ItemsSource="{Binding PersonsList}" >
+                        ItemsSource="{Binding PersonsList,Mode=TwoWay}" >
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="dataModels:Person">
@@ -29,12 +30,24 @@
                                        CommandParameter="{Binding Id}"/>
                         </SwipeView.RightItems>
 
-                        <Grid Padding="5,5,5,5">
-                            <Frame>
-                                <Label Text="{Binding FirstName }"></Label>
-                            </Frame>
-                        </Grid>
+                        <Frame Padding="10,10,10,10" Margin="5,5,5,5">
+                            <Grid ColumnDefinitions="*,*"
+                                  RowDefinitions="auto,auto">
 
+                                <Grid.GestureRecognizers>
+
+                                    <TapGestureRecognizer  Command="{Binding Source={x:Reference ThisPage},Path=BindingContext.NavigateToEditPersonPageCommand}"
+                                                           CommandParameter="{Binding .}"/>
+
+                                </Grid.GestureRecognizers>
+
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding FirstName}" />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding LastName}" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Email}" TextColor="Gray" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Mobile}" TextColor="Gray" />
+
+                            </Grid>
+                        </Frame>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

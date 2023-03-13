@@ -16,20 +16,30 @@ namespace MauiApplication.ViewsModels
         ObservableCollection<Person> PersonsList { get; set; }
 
         //Commands
+
+        IAsyncRelayCommand RefreshPersonsCommand { get; }
         
+
         IRelayCommand<Guid> RemovePersonCommand { get; }
 
         IAsyncRelayCommand NavigateToCreatePersonPageCommand { get; }
+        IAsyncRelayCommand<Person> NavigateToEditPersonPageCommand { get; }
+
     }
-
-
 
     public partial class PersonsViewModel : BaseViewModel, IPersonsViewModel
     {
-        public PersonsViewModel(IPersonsService personsService)
+        private readonly IPersonsService _personsService;
+        private readonly IConnectivity _connectivity;
+
+        public PersonsViewModel(IPersonsService personsService,IConnectivity connectivity)
         {
-            PersonsList = personsService.GetPersons();
+            _personsService = personsService;
+            _connectivity = connectivity;
+            PersonsList = _personsService.GetPersons();
         }
+
+        
 
         #region Fields For Properties
 
@@ -45,14 +55,25 @@ namespace MauiApplication.ViewsModels
 
         /*Community ToolKit Will Generate Commands for that Fields*/
 
-        
-
         [RelayCommand]
-        private async Task NavigateToCreatePersonPage()
+        private async Task RefreshPersons()
         {
-           await Shell.Current.GoToAsync(nameof(CreatePersonPage));
-        }
+            try
+            {
+                if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Sorry", "Required Internet", "ok");
+                    return;
+                }
 
+                PersonsList = _personsService.GetPersons();
+            }
+            catch (Exception e)
+            {
+                await Application.Current?.MainPage?.DisplayAlert("Error", e.Message, "ok")!;
+            }
+
+        }
         [RelayCommand]
         private async void RemovePerson(Guid personId)
         {
@@ -71,10 +92,33 @@ namespace MauiApplication.ViewsModels
             {
                 await Application.Current?.MainPage?.DisplayAlert("Error", e.Message, "ok")!;
             }
-            
+
         }
+
+
+
+        [RelayCommand]
+        private async Task NavigateToCreatePersonPage()
+        {
+           await Shell.Current.GoToAsync(nameof(CreatePersonPage));
+        }
+
+        [RelayCommand]
+        private async Task NavigateToEditPersonPage(Person person)
+        {
+            //Prepare Parameters Collection
+            var parameters = new Dictionary<string, object>
+            {
+                { "PersonToEdit", person }
+            };
+
+            //Navigate To Edit Page and Send Parameters
+            await Shell.Current.GoToAsync(nameof(EditPersonPage), parameters);
+        }
+
 
         #endregion
 
+       
     }
 }

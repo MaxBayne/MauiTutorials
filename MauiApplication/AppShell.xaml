@@ -6,10 +6,10 @@
     xmlns:viewsPages="clr-namespace:MauiApplication.Views.Pages"
     Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate viewsPages:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
 
 
     <ShellItem Title="Persons">

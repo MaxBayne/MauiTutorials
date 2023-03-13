@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MauiApplication.ViewsModels"
+             xmlns:dataModels="clr-namespace:MauiApplication.Models"
+             x:Class="MauiApplication.Views.Pages.EditPersonPage"
+             x:DataType="viewModels:EditPersonViewModel"
+             x:Name="ThisPage"
+             Title="Edit Person">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" IconImageSource="save24.png" Command="{Binding UpdatePersonCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="10"
+          ColumnDefinitions="*"
+          RowDefinitions="100,auto,auto,auto,auto,auto,auto,*">
+
+        <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="dotnet_bot.png"/>
+        <Entry x:Name="TxtId" Grid.Row="1" Placeholder="Id" Text="{Binding Person.Id ,Mode=TwoWay}" IsReadOnly="True" TextColor="Gray"/>
+        <Entry x:Name="TxtFirstName" Grid.Row="2" Placeholder="FirstName" Text="{Binding Person.FirstName ,Mode=TwoWay}"/>
+        <Entry x:Name="TxtLastName" Grid.Row="3" Placeholder="LastName" Text="{Binding Person.LastName  ,Mode=TwoWay}"/>
+        <Entry x:Name="TxtEmail" Grid.Row="4" Placeholder="Email" Text="{Binding Person.Email  ,Mode=TwoWay}"/>
+        <Entry x:Name="TxtMobile" Grid.Row="5" Placeholder="Mobile" Text="{Binding Person.Mobile  ,Mode=TwoWay}"/>
+
+    </Grid>
+
+</ContentPage>

@@ -11,11 +11,18 @@ public partial class AppShell
         //Register the App Routes For Shells
 
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+        
         Routing.RegisterRoute(nameof(ProductsPage), typeof(ProductsPage));
         Routing.RegisterRoute(nameof(DepartmentsPage), typeof(DepartmentsPage));
+        
         Routing.RegisterRoute(nameof(PersonsPage),typeof(PersonsPage));
         Routing.RegisterRoute(nameof(CreatePersonPage), typeof(CreatePersonPage));
         Routing.RegisterRoute(nameof(EditPersonPage), typeof(EditPersonPage));
+
+        Routing.RegisterRoute(nameof(ContactsPage), typeof(ContactsPage));
+        Routing.RegisterRoute(nameof(AddContactPage), typeof(AddContactPage));
+        Routing.RegisterRoute(nameof(EditContactPage), typeof(EditContactPage));
+
 
     }
 }

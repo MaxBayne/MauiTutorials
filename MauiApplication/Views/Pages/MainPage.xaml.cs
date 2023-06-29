@@ -14,11 +14,11 @@ public partial class MainPage : ContentPage
 		count++;
 
 		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
+			btnCounter.Text = $"Clicked {count} time";
 		else
-			CounterBtn.Text = $"Clicked {count} times !";
+            btnCounter.Text = $"Clicked {count} times !";
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
+		SemanticScreenReader.Announce(btnCounter.Text);
 	}
 }
 

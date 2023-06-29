@@ -6,22 +6,26 @@
     xmlns:viewsPages="clr-namespace:MauiApplication.Views.Pages"
     Shell.FlyoutBehavior="Flyout">
 
-    <!--<ShellContent
+    <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate viewsPages:MainPage}"
-        Route="MainPage" />-->
+        Route="MainPage" />
 
 
+    <ShellItem Title="Contacts">
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:ContactsPage}" Route="ContactsPage" />
+    </ShellItem>
+    
     <ShellItem Title="Persons">
-        <ShellContent ContentTemplate="{DataTemplate viewsPages:PersonsPage}" Route="persons" />
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:PersonsPage}" Route="PersonsPage" />
     </ShellItem>
 
     <ShellItem Title="Products">
-        <ShellContent ContentTemplate="{DataTemplate viewsPages:ProductsPage}" Route="products" />
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:ProductsPage}" Route="ProductsPage" />
     </ShellItem>
 
     <ShellItem Title="Departments">
-        <ShellContent ContentTemplate="{DataTemplate viewsPages:DepartmentsPage}" Route="departments" />
+        <ShellContent ContentTemplate="{DataTemplate viewsPages:DepartmentsPage}" Route="DepartmentsPage" />
     </ShellItem>
 
 </Shell>
